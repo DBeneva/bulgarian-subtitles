@@ -1,0 +1,60 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    position: relative;
+    color: #4a6b8b;
+    text-align: center;
+}
+
+h1 {
+    font-family: Georgia, serif;
+}
+
+.subtitle-editor {
+    display: block;
+    margin: auto;
+    background-color: #4a6a8b25;
+    white-space: nowrap;
+    overflow-x: hidden;
+    border-radius: 10px;
+    padding: 30px 60px;
+    line-height: 1.6;
+    font-size: 16px;
+    resize: none;
+}
+
+.subtitle-editor-wrapper {
+    margin: auto;
+}
+
+.subtitle-editor-wrapper::after {
+    content: "";
+    display: inline-block;
+    background-color: rgba(255, 182, 193, 0.282);
+    height: 84%;
+    width: 70px;
+    position: absolute;
+    top: 10.6%;
+    right: 36%;
+}
+
+button {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #4a6b8b;
+    color: lightgray;
+    margin: 10px 0;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+button:hover:not(:disabled) {
+    background-color: lightgray;
+    color: #4a6b8b;
+    box-shadow: 0 0 6px gray;
+}
+
+button:disabled {
+    background-color: lightgray;
+    color: #4a6a8bd8;
+}
