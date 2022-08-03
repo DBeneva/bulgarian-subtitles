@@ -1,21 +1,38 @@
 const subtitleEditor = document.getElementById('subtitle-editor');
 const loadBtn = document.getElementById('load-btn');
+const prepareSubsBtn = document.getElementById('prepare-subs-btn');
 const removeTitleBtn = document.getElementById('remove-title');
 const addTimingBtn = document.getElementById('add-timing');
 
-loadBtn.addEventListener('click', loadSubtitles);
+subtitleEditor.addEventListener('input', enablePrepareSubtitles);
+loadBtn.addEventListener('click', loadScript);
+prepareSubsBtn.addEventListener('click', prepareSubtitles);
 removeTitleBtn.addEventListener('click', removeTitle);
 addTimingBtn.addEventListener('click', addTiming);
 
-async function loadSubtitles() {
+function enablePrepareSubtitles() {
+    if (subtitleEditor.value != '') {
+        prepareSubsBtn.removeAttribute('disabled');
+    }
+}
+
+async function loadScript() {
     const script = await getScript();
+    subtitleEditor.value = script;
+
+    loadBtn.setAttribute('disabled', 'disabled');
+}
+
+function prepareSubtitles() {
+    const script = subtitleEditor.value;
     const cleanedUpScript = cleanUpScript(script);
     const subtitles = makeEachSentenceOnNewLine(cleanedUpScript);
 
     subtitleEditor.value = subtitles;
 
-    loadBtn.setAttribute('disabled', 'disabled');
+    prepareSubsBtn.setAttribute('disabled', 'disabled');
     removeTitleBtn.removeAttribute('disabled');
+    addTimingBtn.removeAttribute('disabled');
 }
 
 async function getScript() {
@@ -37,7 +54,7 @@ function cleanUpScript(script) {
 
 function removeComments(script) {
     return script.includes('[a]')
-        ? script.slice(0, script.lastIndexOf('[a]')).replace(/\[[a-z]\]/g, '')
+        ? script.slice(0, script.lastIndexOf('[a]')).replace(/\[([a-z])+\]/g, '')
         : script;
 }
 
