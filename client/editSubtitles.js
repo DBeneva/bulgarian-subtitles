@@ -25,10 +25,11 @@ async function loadScript() {
 
 function prepareSubtitles() {
     const script = subtitleEditor.value;
-    const cleanedUpScript = cleanUpScript(script);
+    const title = script.slice(0, script.indexOf('\n'));
+    const cleanedUpScript = cleanUpScript(script.slice(script.indexOf('\n') + 1));
     const subtitles = makeEachSentenceOnNewLine(cleanedUpScript);
 
-    subtitleEditor.value = subtitles;
+    subtitleEditor.value = `${title}\n\r${subtitles}`;
 
     prepareSubsBtn.setAttribute('disabled', 'disabled');
     removeTitleBtn.removeAttribute('disabled');
