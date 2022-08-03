@@ -8,9 +8,6 @@ async function start() {
     const app = express();
     const router = express.Router();
 
-    app.use(express.json());
-    app.use('/', router);
-    
     // Solve CORS problem
     app.use((req, res, next) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -20,6 +17,9 @@ async function start() {
         next();
     });
 
+    app.use(express.json());
+    app.use('/', router);
+    
     router.get('/', async (req, res) => {
         try {
             const script = fs.readFileSync(filePath, 'utf8');
