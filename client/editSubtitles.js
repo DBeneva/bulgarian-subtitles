@@ -111,6 +111,8 @@ function removeTitle() {
 }
 
 async function addTiming() {
+    addTimingBtn.setAttribute('disabled', 'disabled');
+    
     addTimingToSubtitleEditor();
     await createVTTFile();
 }
