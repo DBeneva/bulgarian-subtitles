@@ -77,6 +77,10 @@ button:disabled {
     color: #4a6a8bd8;
 }
 
+#remove-title-btn {
+    display: none;
+}
+
  /* width */
  ::-webkit-scrollbar {
     width: 3.5px;
