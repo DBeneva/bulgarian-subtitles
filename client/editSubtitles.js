@@ -1,35 +1,38 @@
 const subtitleEditor = document.getElementById('subtitle-editor');
 const loadScriptBtn = document.getElementById('load-btn');
 const prepareSubsBtn = document.getElementById('prepare-subs-btn');
-const removeTitleBtn = document.getElementById('remove-title-btn');
 const cleanUpBtn = document.getElementById('clean-up-btn');
+const removeTitleBtn = document.getElementById('remove-title-btn');
 const addTimingBtn = document.getElementById('add-timing');
 
 subtitleEditor.addEventListener('input', enablePrepareSubtitles);
 loadScriptBtn.addEventListener('click', loadScript);
 prepareSubsBtn.addEventListener('click', prepareSubtitles);
+cleanUpBtn.addEventListener('click', cleanUpSubtitleEditor);
 removeTitleBtn.addEventListener('click', removeTitle);
 addTimingBtn.addEventListener('click', addTiming);
-cleanUpBtn.addEventListener('click', cleanUp);
 
 function enablePrepareSubtitles() {
     if (subtitleEditor.value != '') {
+        loadScriptBtn.style.display = 'none';
+
         prepareSubsBtn.removeAttribute('disabled');
         cleanUpBtn.style.display = 'inline-block';
         cleanUpBtn.removeAttribute('disabled');
+        
         addTimingBtn.setAttribute('disabled', 'disabled');
-        loadScriptBtn.style.display = 'none';
     }
 }
 
-function cleanUp() {
+function cleanUpSubtitleEditor() {
     subtitleEditor.value = '';
-    cleanUpBtn.setAttribute('disabled', 'disabled');
-    removeTitleBtn.style.display = 'none';
-    prepareSubsBtn.setAttribute('disabled', 'disabled');
-    addTimingBtn.setAttribute('disabled', 'disabled');
+
     loadScriptBtn.style.display = 'inline-block';
     loadScriptBtn.removeAttribute('disabled');
+    prepareSubsBtn.setAttribute('disabled', 'disabled');
+    cleanUpBtn.setAttribute('disabled', 'disabled');
+    removeTitleBtn.style.display = 'none';
+    addTimingBtn.setAttribute('disabled', 'disabled');
 }
 
 async function loadScript() {
@@ -50,14 +53,15 @@ function prepareSubtitles() {
     subtitleEditor.value = title ? `${title}\n\r${subtitles}` : subtitles;
 
     loadScriptBtn.setAttribute('disabled', 'disabled');
+    prepareSubsBtn.setAttribute('disabled', 'disabled');
+    cleanUpBtn.removeAttribute('disabled');
+    
     if (title) {
         removeTitleBtn.style.display = 'inline-block';
         removeTitleBtn.removeAttribute('disabled');
     }
 
-    cleanUpBtn.removeAttribute('disabled');
     addTimingBtn.removeAttribute('disabled');
-    prepareSubsBtn.setAttribute('disabled', 'disabled');
 }
 
 async function getScript() {
