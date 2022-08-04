@@ -1,3 +1,4 @@
+/* Page layout */
 body {
     font-family: 'Courier New', Courier, monospace;
     position: relative;
@@ -9,13 +10,15 @@ body {
     justify-content: center;
     align-items: center;
     background-image: url('./images.png');
-    background-position: 40% 59%;   
+    background-position: 40% 59%;
 }
 
+/* Heading */
 h1 {
     font-family: Georgia, serif;
 }
 
+/* Textarea where subtitles are edited */
 .subtitle-editor {
     background-color: rgb(225, 232, 234);
     white-space: nowrap;
@@ -38,6 +41,7 @@ h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+/* Textarea container (needed because textarea cannot have an ::after element) */
 .subtitle-editor-wrapper {
     position: relative;
 }
@@ -54,6 +58,7 @@ h1 {
     font-size: 18px;
 }
 
+/* Buttons */
 button {
     align-self: center;
     font-size: 18px;
@@ -81,24 +86,21 @@ button:disabled {
     display: none;
 }
 
- /* width */
- ::-webkit-scrollbar {
+/* Scrollbar */
+::-webkit-scrollbar {
     width: 3.5px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
     border-radius: 10px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #4a6b8b; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4a6b8b;
     border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+}
+
+::-webkit-scrollbar-thumb:hover {
     background: #435f7c;
-  }
+}
