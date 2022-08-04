@@ -19,8 +19,7 @@ function enablePrepareSubtitles() {
         prepareSubsBtn.removeAttribute('disabled');
         cleanUpBtn.style.display = 'inline-block';
         cleanUpBtn.removeAttribute('disabled');
-        
-        addTimingBtn.setAttribute('disabled', 'disabled');
+        addTimingBtn.removeAttribute('disabled');
     }
 }
 
@@ -55,7 +54,7 @@ function prepareSubtitles() {
     loadScriptBtn.setAttribute('disabled', 'disabled');
     prepareSubsBtn.setAttribute('disabled', 'disabled');
     cleanUpBtn.removeAttribute('disabled');
-    
+
     if (title) {
         removeTitleBtn.style.display = 'inline-block';
         removeTitleBtn.removeAttribute('disabled');
