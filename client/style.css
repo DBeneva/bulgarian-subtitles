@@ -8,6 +8,8 @@ body {
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+    background-image: url('./images.png');
+    background-position: 40% 59%;   
 }
 
 h1 {
@@ -44,7 +46,7 @@ h1 {
     content: "";
     display: inline-block;
     background-color: rgba(255, 182, 193, 0.282);
-    height: 100%;
+    height: calc(100% - 5px);
     width: 78px;
     position: absolute;
     top: 0;
