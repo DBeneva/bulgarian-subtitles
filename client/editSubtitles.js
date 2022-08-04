@@ -94,7 +94,7 @@ function formatCenturies(script) {
     const patternArabic = / ([0-9]+)(-ти|-ми|-ри)* (в\.|век)/g;
 
     return script
-        .replace(patternRoman, (_, roman) => ` ${romanNumerals.findIndex(v => v.replace(/Х/g, 'X') == roman) + 1}. век`)
+        .replace(patternRoman, (_, roman) => ` ${romanNumerals.findIndex(v => v == roman.replace(/Х/g, 'X')) + 1}. век`)
         .replace(patternArabic, ' $1. век');
 }
 
