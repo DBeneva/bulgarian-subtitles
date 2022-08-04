@@ -15,6 +15,7 @@ addTimingBtn.addEventListener('click', addTiming);
 function enablePrepareSubtitles() {
     if (subtitleEditor.value != '') {
         loadScriptBtn.style.display = 'none';
+        subtitleEditor.style.color = 'initial';
 
         prepareSubsBtn.removeAttribute('disabled');
         cleanUpBtn.style.display = 'inline-block';
@@ -37,10 +38,16 @@ function cleanUpSubtitleEditor() {
 async function loadScript() {
     const script = await getScript();
     subtitleEditor.value = script;
+    console.log(script);
 
-    loadScriptBtn.setAttribute('disabled', 'disabled');
-    prepareSubsBtn.removeAttribute('disabled');
-    removeTitleBtn.removeAttribute('disabled');
+    if (!script.startsWith('ENOENT')) {
+        loadScriptBtn.setAttribute('disabled', 'disabled');
+        prepareSubsBtn.removeAttribute('disabled');
+        removeTitleBtn.removeAttribute('disabled');
+    } else {
+        subtitleEditor.value = 'Не е намерен документ с разширение .txt';
+        subtitleEditor.style.color = 'red';
+    }
 }
 
 function prepareSubtitles() {
