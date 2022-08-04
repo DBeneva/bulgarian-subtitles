@@ -54,6 +54,7 @@ function cleanUpScript(script) {
     cleanedUpScript = formatCenturies(cleanedUpScript);
     cleanedUpScript = removeSpacesAndEmoticons(cleanedUpScript);
     cleanedUpScript = fixDashesAndHyphens(cleanedUpScript);
+    cleanedUpScript = fixUchaSe(cleanedUpScript);
     
     return cleanedUpScript;
 }
@@ -91,6 +92,10 @@ function fixDashesAndHyphens(script) {
         .replace(/ \- | \-|\- /g, ' – ')
         .replace(/([0-9]+)\-([0-9]+)/, '$1 \– $2')
         .replace(/( по| най) \– /g, '$1-');
+}
+
+function fixUchaSe(script) {
+    return script.replace(/Уча се/g, 'Уча.се');
 }
 
 function makeEachSentenceOnNewLine(script) {
