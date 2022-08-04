@@ -53,7 +53,8 @@ function cleanUpScript(script) {
     let cleanedUpScript = removeComments(script);
     cleanedUpScript = formatCenturies(cleanedUpScript);
     cleanedUpScript = removeSpacesAndEmoticons(cleanedUpScript);
-
+    cleanedUpScript = fixDashesAndHyphens(cleanedUpScript);
+    
     return cleanedUpScript;
 }
 
@@ -65,7 +66,7 @@ function removeComments(script) {
 
 function formatCenturies(script) {
     const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'];
-    const patternRoman = / ([IVX]+)(-ти|-ми|-ри)* (в\.|век)/g;
+    const patternRoman = / ([IVX]+|[ХI]+)(-ти|-ми|-ри)? (в\.|век)/g;
     const patternArabic = / ([0-9]+)(-ти|-ми|-ри)* (в\.|век)/g;
 
     return script
@@ -84,8 +85,16 @@ function removeSpacesAndEmoticons(script) {
     return textOnlyScript;
 }
 
+function fixDashesAndHyphens(script) {
+    return script
+        .replace(/\–/g, '-')
+        .replace(/ \- | \-|\- /g, ' – ')
+        .replace(/([0-9]+)\-([0-9]+)/, '$1 \– $2')
+        .replace(/( по| най) \– /g, '$1-');
+}
+
 function makeEachSentenceOnNewLine(script) {
-    const pattern = /(?<! Уча)(?<! р)(?<! гр)(?<! о)(?<! г)(?<! хил)(?<![1-9])(?<! пр)(?<! н)(?<! т)(?<![ (]дн)([\.?!]) *(?=[А-Я])/g;
+    const pattern = /(?<! Уча)(?<! р)(?<! гр)(?<! о)(?<! г)(?<! хил)(?<![1-9])(?<! пр)(?<! н)(?<! т.е)(?<! т.нар)(?<![ (]дн)([\.?!]) *(?=[А-Я])/g;
     return script.replace(pattern, '$1\n\r');
 }
 
