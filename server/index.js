@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const file = fs.readdirSync('../../').filter(f => f.endsWith('.txt'))[0];
 const filePath = '../../' + fs.readdirSync('../../').filter(f => f.endsWith('.txt'))[0];
 
 start();
@@ -22,7 +23,7 @@ async function start() {
     
     router.get('/', async (req, res) => {
         try {
-            const script = fs.readFileSync(filePath, 'utf8');
+            const script = fs.readFileSync(`../../${file}`, 'utf8');
             res.json(script);
         } catch (err) {
             res.status(err.status || 400).json(err.message);
@@ -31,7 +32,8 @@ async function start() {
 
     router.post('/vtt', async (req, res) => {
         try {
-            fs.writeFileSync(`${filePath == '../../undefined' ? '../../subtitles' : filePath}.vtt`, req.body.subtitles);
+            console.log(file, !!file);
+            fs.writeFileSync(`../../${file || 'subtitles'}.vtt`, req.body.subtitles);
             res.json({});
         } catch (err) {
             res.status(err.status || 400).json(err.message);
