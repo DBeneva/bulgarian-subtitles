@@ -12,14 +12,22 @@ h1 {
 .subtitle-editor {
     display: block;
     margin: auto;
-    background-color: #4a6a8b25;
+    background-color: rgb(225, 232, 234);
     white-space: nowrap;
     overflow-x: hidden;
     border-radius: 10px;
-    padding: 30px 60px;
+    border-width: 30px 60px;
+    border-color: rgb(225, 232, 234);
+    /* padding: 30px 60px; */
     line-height: 1.6;
     font-size: 16px;
     resize: none;
+}
+
+.subtitle-editor:focus {
+    outline-color: lightgray;
+    outline-width: 5px;
+    outline-offset: 1px;
 }
 
 .subtitle-editor-wrapper {
