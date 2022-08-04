@@ -3,6 +3,11 @@ body {
     position: relative;
     color: #4a6b8b;
     text-align: center;
+    font-size: 18px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -10,8 +15,6 @@ h1 {
 }
 
 .subtitle-editor {
-    display: block;
-    margin: auto;
     background-color: rgb(225, 232, 234);
     white-space: nowrap;
     overflow-x: hidden;
@@ -19,8 +22,8 @@ h1 {
     border-width: 30px 60px;
     border-color: rgb(225, 232, 234);
     line-height: 1.6;
-    font-size: 16px;
     resize: none;
+    font-size: 18px;
 }
 
 .subtitle-editor:focus {
@@ -29,29 +32,35 @@ h1 {
     outline-offset: 1px;
 }
 
+.subtitle-editor::placeholder {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 .subtitle-editor-wrapper {
-    margin: auto;
+    position: relative;
 }
 
 .subtitle-editor-wrapper::after {
     content: "";
     display: inline-block;
     background-color: rgba(255, 182, 193, 0.282);
-    height: 84%;
-    width: 70px;
+    height: 100%;
+    width: 78px;
     position: absolute;
-    top: 10.6%;
-    right: 36%;
+    top: 0;
+    left: calc(100% - 8.7em);
+    font-size: 18px;
 }
 
 button {
+    align-self: center;
+    font-size: 18px;
     padding: 10px;
     border-radius: 8px;
     border: none;
     background-color: #4a6b8b;
     color: lightgray;
     margin: 10px 0;
-    font-size: 18px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -68,7 +77,7 @@ button:disabled {
 
  /* width */
  ::-webkit-scrollbar {
-    width: 5px;
+    width: 3.5px;
   }
   
   /* Track */
@@ -85,5 +94,5 @@ button:disabled {
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: lightgray;
+    background: #435f7c;
   }
