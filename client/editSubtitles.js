@@ -121,7 +121,7 @@ function fixDashesAndHyphens(script) {
         .replace(/\–/g, '-')
         .replace(/ \- | \-|\- /g, ' – ')
         .replace(/([0-9]+)\-([0-9]+)/, '$1 \– $2')
-        .replace(/( по| най) \– /g, '$1-');
+        .replace(/( по| най|[ \n]По|[ \n]Най) \– /g, '$1-');
 }
 
 function fixUchaSe(script) {
