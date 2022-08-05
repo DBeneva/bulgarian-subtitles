@@ -105,6 +105,10 @@ function formatCenturies(script) {
         .replace(patternArabic, ' $1. век');
 }
 
+function removeCommentsInBrackets(script) {
+    return script.replace(/\(.*?\)/, '');
+}
+
 function removeSpacesAndEmoticons(script) {
     const pattern = /^ | (?= )|\n|\r|\t|☺| $/;
     let textOnlyScript = script;
