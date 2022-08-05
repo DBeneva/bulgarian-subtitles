@@ -106,7 +106,7 @@ function formatCenturies(script) {
 }
 
 function removeSpacesAndEmoticons(script) {
-    const pattern = /^ | (?= )|\n|\r|\t|☺/;
+    const pattern = /^ | (?= )|\n|\r|\t|☺| $/;
     let textOnlyScript = script;
 
     while (pattern.test(textOnlyScript)) {
