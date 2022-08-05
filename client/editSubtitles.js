@@ -58,7 +58,7 @@ function prepareSubtitles() {
 
     subtitleEditor.value = title ? `${title}\n\r${subtitles}` : subtitles;
 
-    loadScriptBtn.setAttribute('disabled', 'disabled');
+    loadScriptBtn.style.display = 'none';
     prepareSubsBtn.setAttribute('disabled', 'disabled');
     cleanUpBtn.removeAttribute('disabled');
 
