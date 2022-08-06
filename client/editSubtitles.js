@@ -38,7 +38,6 @@ function cleanUpSubtitleEditor() {
 async function loadScript() {
     const script = await getScript();
     subtitleEditor.value = script;
-    console.log(script);
 
     if (!script.startsWith('ENOENT')) {
         loadScriptBtn.setAttribute('disabled', 'disabled');
@@ -52,11 +51,13 @@ async function loadScript() {
 
 function prepareSubtitles() {
     const script = subtitleEditor.value;
-    const title = script.includes('\n') ? script.slice(0, script.indexOf('\n')) : '';
-    const cleanedUpScript = cleanUpScript(script.slice(script.indexOf('\n') + 1));
+    // const title = script.includes('\n') ? script.slice(0, script.indexOf('\n')) : '';
+    // const cleanedUpScript = cleanUpScript(script.slice(script.indexOf('\n') + 1));
+    const cleanedUpScript = cleanUpScript(script);
     const subtitles = makeEachSentenceOnNewLine(cleanedUpScript);
 
-    subtitleEditor.value = title ? `${title}\n\r${subtitles}` : subtitles;
+    // subtitleEditor.value = title ? `${title}\n\r${subtitles}` : subtitles;
+    subtitleEditor.value = subtitles;
 
     loadScriptBtn.style.display = 'none';
     prepareSubsBtn.setAttribute('disabled', 'disabled');
@@ -110,7 +111,7 @@ function removeCommentsInBrackets(script) {
 }
 
 function removeSpacesAndEmoticons(script) {
-    const pattern = /^ | (?= )|\n|\r|\t|☺| $/;
+    const pattern = /^ | (?= )|\n|\r|\t|☺| $|\(.*?\)/;
     let textOnlyScript = script;
 
     while (pattern.test(textOnlyScript)) {
