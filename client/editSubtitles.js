@@ -85,6 +85,7 @@ function cleanUpScript(script) {
     cleanedUpScript = formatCenturies(cleanedUpScript);
     cleanedUpScript = removeSpacesAndEmoticons(cleanedUpScript);
     cleanedUpScript = fixDashesAndHyphens(cleanedUpScript);
+    cleanedUpScript = fixSpacesBeforePeriodAndComma(cleanedUpScript);
     cleanedUpScript = fixQuotationMarks(cleanedUpScript);
     cleanedUpScript = fixUchaSe(cleanedUpScript);
 
@@ -128,6 +129,10 @@ function fixDashesAndHyphens(script) {
         .replace(/ \- | \-|\- /g, ' – ')
         .replace(/([0-9]+)\-([0-9]+)/, '$1 \– $2')
         .replace(/( по| най|[ \n]По|[ \n]Най) \– /g, '$1-');
+}
+
+function fixSpacesBeforePeriodAndComma(script) {
+    return script.replace(/ (\.|\,)/g, '$1');
 }
 
 function fixQuotationMarks(script) {

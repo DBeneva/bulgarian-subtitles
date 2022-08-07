@@ -1,7 +1,6 @@
 const express = require('express');
 const fs = require('fs');
 const file = fs.readdirSync('../../').filter(f => f.endsWith('.txt'))[0];
-const filePath = '../../' + fs.readdirSync('../../').filter(f => f.endsWith('.txt'))[0];
 
 start();
 
