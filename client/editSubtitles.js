@@ -85,6 +85,7 @@ function cleanUpScript(script) {
     cleanedUpScript = formatCenturies(cleanedUpScript);
     cleanedUpScript = removeSpacesAndEmoticons(cleanedUpScript);
     cleanedUpScript = fixDashesAndHyphens(cleanedUpScript);
+    cleanedUpScript = fixEllipsis(cleanedUpScript);
     cleanedUpScript = fixSpacesBeforePeriodAndComma(cleanedUpScript);
     cleanedUpScript = fixQuotationMarks(cleanedUpScript);
     cleanedUpScript = fixUchaSe(cleanedUpScript);
@@ -129,6 +130,10 @@ function fixDashesAndHyphens(script) {
         .replace(/ \- | \-|\- /g, ' – ')
         .replace(/([0-9]+)\-([0-9]+)/, '$1 \– $2')
         .replace(/( по| най|[ \n]По|[ \n]Най) \– /g, '$1-');
+}
+
+function fixEllipsis(script) {
+    return script.replace(/…/g, '...');
 }
 
 function fixSpacesBeforePeriodAndComma(script) {
