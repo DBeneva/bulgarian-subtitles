@@ -151,8 +151,6 @@ function fixUchaSe(script) {
 }
 
 function fixXAndY(script) {
-    // .replace(patternRoman, (_, roman) => ` ${romanNumerals.findIndex(v => v == roman.replace(/Х/g, 'X')) + 1}. век`)
-
     return script.replace(/ (X|Х|Y)(?=[ \.\,])/g, (_, xOrY) => ` **${xOrY.replace('Х', 'X').toLowerCase()}**`);
 }
 
