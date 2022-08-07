@@ -20,11 +20,11 @@ h1 {
 
 /* Textarea where subtitles are edited */
 .subtitle-editor {
-    background-image: linear-gradient(to right, rgba(225, 232, 234, 1) 41.4%, rgba(225, 232, 234, 0) 41.4%);
+    background-image: linear-gradient(to right, rgba(225, 232, 234, 1) 41.3%, rgba(225, 232, 234, 0) 41.3%);
     white-space: nowrap;
     overflow-x: hidden;
     border-radius: 10px;
-    border-left-width: 30px;
+    border-width: 0 0 0 30px;
     /* border-color: rgb(225, 232, 234); */
     /* border-image: linear-gradient(to right, rgba(225, 232, 234, 1), rgba(225, 232, 234, 0)); */
     border-left-color: rgba(225, 232, 234, 1);
