@@ -68,7 +68,8 @@ button:disabled {
     color: #4a6a8bd8;
 }
 
-#remove-title-btn {
+#remove-title-btn,
+#save-btn {
     display: none;
 }
 

@@ -3,6 +3,7 @@ const loadScriptBtn = document.getElementById('load-btn');
 const prepareSubsBtn = document.getElementById('prepare-subs-btn');
 const cleanUpBtn = document.getElementById('clean-up-btn');
 const removeTitleBtn = document.getElementById('remove-title-btn');
+const saveBtn = document.getElementById('save-btn');
 const addTimingBtn = document.getElementById('add-timing');
 
 subtitleEditor.addEventListener('input', enablePrepareSubtitles);
@@ -10,6 +11,7 @@ loadScriptBtn.addEventListener('click', loadScript);
 prepareSubsBtn.addEventListener('click', prepareSubtitles);
 cleanUpBtn.addEventListener('click', cleanUpSubtitleEditor);
 removeTitleBtn.addEventListener('click', removeTitle);
+saveBtn.addEventListener('click', saveTxTFile);
 addTimingBtn.addEventListener('click', addTiming);
 
 function enablePrepareSubtitles() {
@@ -19,7 +21,9 @@ function enablePrepareSubtitles() {
 
         prepareSubsBtn.removeAttribute('disabled');
         cleanUpBtn.style.display = 'inline-block';
+        saveBtn.style.display = 'inline-block';
         cleanUpBtn.removeAttribute('disabled');
+        saveBtn.removeAttribute('disabled');
         addTimingBtn.removeAttribute('disabled');
     }
 }
@@ -164,6 +168,22 @@ function removeTitle() {
     subtitleEditor.value = subtitles.replace(/^.*\n\n/, '');
 
     removeTitleBtn.setAttribute('disabled', 'disabled');
+}
+
+async function saveTxTFile() {
+    try {
+        await fetch('http://localhost:3000', {
+            method: 'post',
+            headers: {
+                ['Content-Type']: 'application/json'
+            },
+            body: JSON.stringify({ subtitles: subtitleEditor.value })
+        });
+
+        saveBtn.setAttribute('disabled', 'disabled');
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 async function addTiming() {
