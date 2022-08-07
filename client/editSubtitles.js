@@ -89,6 +89,7 @@ function cleanUpScript(script) {
     cleanedUpScript = fixSpacesBeforePeriodAndComma(cleanedUpScript);
     cleanedUpScript = fixQuotationMarks(cleanedUpScript);
     cleanedUpScript = fixUchaSe(cleanedUpScript);
+    cleanedUpScript = fixXAndY(cleanedUpScript);
 
     return cleanedUpScript;
 }
@@ -128,6 +129,7 @@ function fixDashesAndHyphens(script) {
     return script
         .replace(/\–/g, '-')
         .replace(/ \- | \-|\- /g, ' – ')
+        .replace(/(?<=\D )– (\d)/g, '-$1')
         .replace(/([0-9]+)\-([0-9]+)/, '$1 \– $2')
         .replace(/( по| най|[ \n]По|[ \n]Най) \– /g, '$1-');
 }
@@ -146,6 +148,12 @@ function fixQuotationMarks(script) {
 
 function fixUchaSe(script) {
     return script.replace(/Уча се/g, 'Уча.се');
+}
+
+function fixXAndY(script) {
+    // .replace(patternRoman, (_, roman) => ` ${romanNumerals.findIndex(v => v == roman.replace(/Х/g, 'X')) + 1}. век`)
+
+    return script.replace(/ (X|Х|Y)(?=[ \.\,])/g, (_, xOrY) => ` **${xOrY.replace('Х', 'X').toLowerCase()}**`);
 }
 
 function makeEachSentenceOnNewLine(script) {
