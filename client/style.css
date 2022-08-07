@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     background-image: url('./images.png');
-    background-position: 40% 59%;
+    background-position: 40% 63%;
 }
 
 /* Heading */
@@ -20,7 +20,7 @@ h1 {
 
 /* Textarea where subtitles are edited */
 .subtitle-editor {
-    background-image: linear-gradient(to right, rgba(225, 232, 234, 1) 43.3%, rgba(225, 232, 234, 0) 43.3%);
+    background-image: linear-gradient(to right, rgba(225, 232, 234, 1) 41.4%, rgba(225, 232, 234, 0) 41.4%);
     white-space: nowrap;
     overflow-x: hidden;
     border-radius: 10px;
@@ -59,7 +59,7 @@ h1 {
     width: 78px;
     position: absolute;
     top: 0;
-    left: calc(100% - 36.30em);
+    left: calc(100% - 33em);
     font-size: 18px;
 }
 
