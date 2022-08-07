@@ -20,15 +20,20 @@ h1 {
 
 /* Textarea where subtitles are edited */
 .subtitle-editor {
-    background-color: rgb(225, 232, 234);
+    background-image: linear-gradient(to right, rgba(225, 232, 234, 1) 43.3%, rgba(225, 232, 234, 0) 43.3%);
     white-space: nowrap;
     overflow-x: hidden;
     border-radius: 10px;
-    border-width: 30px 60px;
-    border-color: rgb(225, 232, 234);
+    border-left-width: 30px;
+    /* border-color: rgb(225, 232, 234); */
+    /* border-image: linear-gradient(to right, rgba(225, 232, 234, 1), rgba(225, 232, 234, 0)); */
+    border-left-color: rgba(225, 232, 234, 1);
+    border-top-color: rgba(225, 232, 234, 1);
+    border-bottom-color: rgba(225, 232, 234, 0);
     line-height: 1.6;
     resize: none;
     font-size: 18px;
+    padding-top: 20px;
 }
 
 .subtitle-editor:focus {
@@ -54,7 +59,7 @@ h1 {
     width: 78px;
     position: absolute;
     top: 0;
-    left: calc(100% - 8.7em);
+    left: calc(100% - 36.30em);
     font-size: 18px;
 }
 
