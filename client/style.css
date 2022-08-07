@@ -20,7 +20,7 @@ h1 {
 
 /* Textarea where subtitles are edited */
 .subtitle-editor {
-    background-image: linear-gradient(to right, rgba(225, 232, 234, 1) 41.3%, rgba(225, 232, 234, 0) 41.3%);
+    background-image: linear-gradient(to right, rgba(225, 232, 234, 1) 41.3%, rgba(255, 182, 193, 0.282) 41.3%, rgba(255, 182, 193, 0.282) 49%, transparent 49%);
     white-space: nowrap;
     overflow-x: hidden;
     border-radius: 10px;
@@ -42,23 +42,6 @@ h1 {
 
 .subtitle-editor::placeholder {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-/* Textarea container (needed because textarea cannot have an ::after element) */
-.subtitle-editor-wrapper {
-    position: relative;
-}
-
-.subtitle-editor-wrapper::after {
-    content: "";
-    display: inline-block;
-    background-color: rgba(255, 182, 193, 0.282);
-    height: calc(100% - 5px);
-    width: 78px;
-    position: absolute;
-    top: 0;
-    left: calc(100% - 33em);
-    font-size: 18px;
 }
 
 /* Buttons */
