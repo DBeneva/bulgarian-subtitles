@@ -92,7 +92,8 @@ function cleanUpScript(script) {
     cleanedUpScript = fixEllipsis(cleanedUpScript);
     cleanedUpScript = fixSpacesBeforePeriodAndComma(cleanedUpScript);
     cleanedUpScript = fixQuotationMarks(cleanedUpScript);
-    cleanedUpScript = fixUchaSe(cleanedUpScript);
+    cleanedUpScript = fixFemininePersonalPronoun(cleanedUpScript);
+    cleanedUpScript = fixBrandNames(cleanedUpScript);
     cleanedUpScript = fixXAndY(cleanedUpScript);
 
     return cleanedUpScript;
@@ -150,12 +151,18 @@ function fixQuotationMarks(script) {
     return script.includes('”') ? script.replace(/“(.+?)”/g, '„$1“') : script;
 }
 
-function fixUchaSe(script) {
-    return script.replace(/Уча се/g, 'Уча.се');
+function fixFemininePersonalPronoun(script) {
+    return script.replace(/ й /g, ' ѝ ');
+}
+
+function fixBrandNames(script) {
+    return script
+        .replace(/Уча се/g, 'Уча.се')
+        .replace(/ Scratch| Скрач| „Скрач“/g, ' **Scratch**');
 }
 
 function fixXAndY(script) {
-    return script.replace(/ (X|Х|Y)(?=[ \.\,])/g, (_, xOrY) => ` **${xOrY.replace('Х', 'X').toLowerCase()}**`);
+    return script.replace(/ (X|Х|Y|x|х|y)(?=[ \.\,])/g, (_, xOrY) => ` **${xOrY.replace('Х', 'X').toLowerCase()}**`);
 }
 
 function makeEachSentenceOnNewLine(script) {
