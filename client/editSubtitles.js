@@ -152,7 +152,7 @@ function fixQuotationMarks(script) {
 }
 
 function fixFemininePersonalPronoun(script) {
-    return script.replace(/ й /g, ' ѝ ');
+    return script.replace(/ й([ \.\,])/g, ' ѝ$1');
 }
 
 function fixBrandNames(script) {
