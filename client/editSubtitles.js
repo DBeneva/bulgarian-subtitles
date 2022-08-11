@@ -90,7 +90,7 @@ function cleanUpScript(script) {
     cleanedUpScript = removeSpacesAndEmoticons(cleanedUpScript);
     cleanedUpScript = fixDashesAndHyphens(cleanedUpScript);
     cleanedUpScript = fixEllipsis(cleanedUpScript);
-    cleanedUpScript = fixSpacesBeforePeriodAndComma(cleanedUpScript);
+    cleanedUpScript = fixSpacesBeforePunctuationMarks(cleanedUpScript);
     cleanedUpScript = fixQuotationMarks(cleanedUpScript);
     cleanedUpScript = fixFemininePersonalPronoun(cleanedUpScript);
     cleanedUpScript = fixBrandNames(cleanedUpScript);
@@ -143,8 +143,8 @@ function fixEllipsis(script) {
     return script.replace(/…/g, '...');
 }
 
-function fixSpacesBeforePeriodAndComma(script) {
-    return script.replace(/ (\.|\,)/g, '$1');
+function fixSpacesBeforePunctuationMarks(script) {
+    return script.replace(/ (\.|\,|\?|\!)/g, '$1');
 }
 
 function fixQuotationMarks(script) {
