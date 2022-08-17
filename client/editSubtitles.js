@@ -91,6 +91,7 @@ function cleanUpScript(script) {
     cleanedUpScript = fixEllipsis(cleanedUpScript);
     cleanedUpScript = fixSpacesBeforePunctuationMarks(cleanedUpScript);
     cleanedUpScript = fixQuotationMarks(cleanedUpScript);
+    cleanedUpScript = fixSoCalled(cleanedUpScript);
     cleanedUpScript = fixFemininePersonalPronoun(cleanedUpScript);
     cleanedUpScript = fixBrandNames(cleanedUpScript);
     cleanedUpScript = fixXAndY(cleanedUpScript);
@@ -150,6 +151,10 @@ function fixQuotationMarks(script) {
     return script.includes('”') ? script.replace(/“(.+?)”/g, '„$1“') : script;
 }
 
+function fixSoCalled(script) {
+    return script.replace(/т\.нар /g, 'т.нар. ');
+}
+
 function fixFemininePersonalPronoun(script) {
     return script.replace(/ й([ \.\,])/g, ' ѝ$1');
 }
@@ -171,9 +176,14 @@ function makeEachSentenceOnNewLine(script) {
 
 function removeTitle() {
     const subtitles = subtitleEditor.value;
-    subtitleEditor.value = subtitles.replace(/^.*\n\n/, '');
+    const subtitlesNoExclamation = removeExclamationMarks(subtitles);
+    subtitleEditor.value = subtitlesNoExclamation.replace(/^.*\n\n/, '');
 
     removeTitleBtn.setAttribute('disabled', 'disabled');
+}
+
+function removeExclamationMarks(subtitles) {
+    return subtitles.replace(/\!/g, '.');
 }
 
 async function saveTxTFile() {
