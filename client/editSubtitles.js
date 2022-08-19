@@ -105,6 +105,17 @@ function removeComments(script) {
         : script;
 }
 
+function removeSpacesAndEmoticons(script) {
+    const pattern = /^ | (?=[ \n\r\t])|\n|\r|\t|☺| $|\(.*?\)/;
+    let textOnlyScript = script;
+
+    while (pattern.test(textOnlyScript)) {
+        textOnlyScript = textOnlyScript.replace(pattern, '');
+    }
+
+    return textOnlyScript;
+}
+
 function formatCenturies(script) {
     const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI'];
     const patternRoman = / ([IVX]+|[ХI]+)(-ти|-ми|-ри)? (в\.|век)/g;
@@ -117,17 +128,6 @@ function formatCenturies(script) {
 
 function removeCommentsInBrackets(script) {
     return script.replace(/\(.*?\)/, '');
-}
-
-function removeSpacesAndEmoticons(script) {
-    const pattern = /^ | (?= )|\n|\r|\t|☺| $|\(.*?\)/;
-    let textOnlyScript = script;
-
-    while (pattern.test(textOnlyScript)) {
-        textOnlyScript = textOnlyScript.replace(pattern, '');
-    }
-
-    return textOnlyScript;
 }
 
 function fixDashesAndHyphens(script) {
