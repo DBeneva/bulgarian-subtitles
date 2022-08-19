@@ -85,8 +85,8 @@ async function getScript() {
 
 function cleanUpScript(script) {
     let cleanedUpScript = removeComments(script);
-    cleanedUpScript = formatCenturies(cleanedUpScript);
     cleanedUpScript = removeSpacesAndEmoticons(cleanedUpScript);
+    cleanedUpScript = formatCenturies(cleanedUpScript);
     cleanedUpScript = fixDashesAndHyphens(cleanedUpScript);
     cleanedUpScript = fixEllipsis(cleanedUpScript);
     cleanedUpScript = fixSpacesBeforePunctuationMarks(cleanedUpScript);
