@@ -55,10 +55,10 @@ async function loadScript() {
 
 function prepareSubtitles() {
     const script = subtitleEditor.value;
-    const title = /(?<![\.\!\? *])\n/.test(script) ? script.slice(0, script.indexOf('\n')) : '';
+    const title = /(?<![\.\!\?] *)\n/.test(script) ? script.slice(0, script.indexOf('\n')) : '';
     const cleanedUpTitle = title ? cleanUpScript(title) : '';
-    const cleanedUpScript = title ? cleanUpScript(script.slice(script.indexOf('\n') + 1)) : script;
-    const subtitles = `${cleanedUpTitle}\n\n${makeEachSentenceOnNewLine(cleanedUpScript)}`;
+    const cleanedUpScript = title ? cleanUpScript(script.slice(script.indexOf('\n') + 1)) : cleanUpScript(script);
+    const subtitles = `${cleanedUpTitle ? cleanedUpTitle + '\n\n' : ''}${makeEachSentenceOnNewLine(cleanedUpScript)}`;
 
     subtitleEditor.value = subtitles;
 
