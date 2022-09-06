@@ -2,7 +2,6 @@ const subtitleEditor = document.getElementById('subtitle-editor');
 const loadScriptBtn = document.getElementById('load-btn');
 const prepareSubsBtn = document.getElementById('prepare-subs-btn');
 const cleanUpBtn = document.getElementById('clean-up-btn');
-const removeTitleBtn = document.getElementById('remove-title-btn');
 const saveBtn = document.getElementById('save-btn');
 const addTimingBtn = document.getElementById('add-timing');
 
@@ -10,7 +9,6 @@ subtitleEditor.addEventListener('input', enablePrepareSubtitles);
 loadScriptBtn.addEventListener('click', loadScript);
 prepareSubsBtn.addEventListener('click', prepareSubtitles);
 cleanUpBtn.addEventListener('click', cleanUpSubtitleEditor);
-removeTitleBtn.addEventListener('click', removeTitle);
 saveBtn.addEventListener('click', saveTxTFile);
 addTimingBtn.addEventListener('click', addTiming);
 
@@ -35,7 +33,6 @@ function cleanUpSubtitleEditor() {
     loadScriptBtn.removeAttribute('disabled');
     prepareSubsBtn.setAttribute('disabled', 'disabled');
     cleanUpBtn.setAttribute('disabled', 'disabled');
-    removeTitleBtn.style.display = 'none';
     addTimingBtn.setAttribute('disabled', 'disabled');
 }
 
@@ -46,7 +43,6 @@ async function loadScript() {
     if (!script.startsWith('ENOENT')) {
         loadScriptBtn.setAttribute('disabled', 'disabled');
         prepareSubsBtn.removeAttribute('disabled');
-        removeTitleBtn.removeAttribute('disabled');
     } else {
         subtitleEditor.value = 'Не е намерен документ с разширение .txt';
         subtitleEditor.style.color = 'red';
@@ -55,22 +51,14 @@ async function loadScript() {
 
 function prepareSubtitles() {
     const script = subtitleEditor.value;
-    const title = /(?<![\.\!\?] *)\n/.test(script) ? script.slice(0, script.indexOf('\n')) : '';
-    const cleanedUpTitle = title ? cleanUpScript(title) : '';
-    const cleanedUpScript = title ? cleanUpScript(script.slice(script.indexOf('\n') + 1)) : cleanUpScript(script);
-    const subtitles = `${cleanedUpTitle ? cleanedUpTitle + '\n\n' : ''}${makeEachSentenceOnNewLine(cleanedUpScript)}`;
+    const cleanedUpScript = cleanUpScript(script);
+    const subtitles = makeEachSentenceOnNewLine(cleanedUpScript);
 
     subtitleEditor.value = subtitles;
 
     loadScriptBtn.style.display = 'none';
     prepareSubsBtn.setAttribute('disabled', 'disabled');
     cleanUpBtn.removeAttribute('disabled');
-
-    if (title) {
-        removeTitleBtn.style.display = 'inline-block';
-        removeTitleBtn.removeAttribute('disabled');
-    }
-
     addTimingBtn.removeAttribute('disabled');
 }
 
@@ -85,7 +73,9 @@ async function getScript() {
 
 function cleanUpScript(script) {
     let cleanedUpScript = removeComments(script);
-    cleanedUpScript = removeSpacesAndEmoticons(cleanedUpScript);
+    cleanedUpScript = removeSpacesAndNewLines(cleanedUpScript);
+    cleanedUpScript = removeEmoticons(cleanedUpScript);
+    cleanedUpScript = removeLinks(cleanedUpScript);
     cleanedUpScript = formatCenturies(cleanedUpScript);
     cleanedUpScript = fixDashesAndHyphens(cleanedUpScript);
     cleanedUpScript = fixEllipsis(cleanedUpScript);
@@ -105,8 +95,8 @@ function removeComments(script) {
         : script;
 }
 
-function removeSpacesAndEmoticons(script) {
-    const pattern = /^ | (?=[ \n\r\t])|\n|\r|\t|☺| $|\(.*?\)/;
+function removeSpacesAndNewLines(script) {
+    const pattern = /^ | (?=[ \n\r\t])|\n|\r|\t| $|\(.*?\)/;
     let textOnlyScript = script;
 
     while (pattern.test(textOnlyScript)) {
@@ -114,6 +104,14 @@ function removeSpacesAndEmoticons(script) {
     }
 
     return textOnlyScript;
+}
+
+function removeEmoticons(script) {
+    return script.replace(/☺/g, '');
+}
+
+function removeLinks(script) {
+    return script.replace(/http.*?(?=[а-яА-Я]|\n)/g, '');
 }
 
 function formatCenturies(script) {
@@ -172,14 +170,6 @@ function fixXAndY(script) {
 function makeEachSentenceOnNewLine(script) {
     const pattern = /(?<! Уча)(?<! р)(?<! гр)(?<! о)(?<! г)(?<! хил)(?<![1-9])(?<! пр)(?<! н)(?<! т.е)(?<! т.нар)(?<![ (]дн)([\.?!]) *(?=[А-Я])/g;
     return script.replace(pattern, '$1\n\r');
-}
-
-function removeTitle() {
-    const subtitles = subtitleEditor.value;
-    const subtitlesNoExclamation = removeExclamationMarks(subtitles);
-    subtitleEditor.value = subtitlesNoExclamation.replace(/^.*\n\n/, '');
-
-    removeTitleBtn.setAttribute('disabled', 'disabled');
 }
 
 function removeExclamationMarks(subtitles) {
