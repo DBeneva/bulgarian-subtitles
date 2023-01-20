@@ -40,7 +40,7 @@ async function start() {
 
     router.post('/vtt', async (req, res) => {
         try {
-            fs.writeFileSync(`../../${file || 'subtitles'}.vtt`, req.body.subtitles);
+            fs.writeFileSync('../../subtitles.vtt', req.body.subtitles);
             res.json({});
         } catch (err) {
             res.status(err.status || 400).json(err.message);

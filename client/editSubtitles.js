@@ -72,8 +72,8 @@ async function getScript() {
 }
 
 function cleanUpScript(script) {
-    let cleanedUpScript = removeComments(script);
-    cleanedUpScript = removeSpacesAndNewLines(cleanedUpScript);
+    let cleanedUpScript = removeSpacesAndNewLines(script);
+    cleanedUpScript = removeComments(cleanedUpScript);
     cleanedUpScript = removeEmoticons(cleanedUpScript);
     cleanedUpScript = removeLinks(cleanedUpScript);
     cleanedUpScript = formatCenturies(cleanedUpScript);
@@ -96,7 +96,7 @@ function removeComments(script) {
 }
 
 function removeSpacesAndNewLines(script) {
-    const pattern = /^ | (?=[ \n\r\t])|\n|\r|\t| $|\(.*?\)/;
+    const pattern = /^ | (?=[ \n\r\t])|\n|\r|\t| $/;
     let textOnlyScript = script;
 
     while (pattern.test(textOnlyScript)) {
